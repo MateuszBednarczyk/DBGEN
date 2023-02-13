@@ -1,6 +1,7 @@
 package entities
 
 type Table struct {
-	primaryKey Column
-	columns    []Column
+	Name       string     `json:"Name"`
+	PrimaryKey ColumnType `json:"PrimaryKey"`
+	Columns    []Column   `json:"Columns"`
 }

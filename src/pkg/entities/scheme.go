@@ -1,6 +1,6 @@
 package entities
 
 type Scheme struct {
-	name   string
-	tables []Table
+	Name   string  `json:"Name"`
+	Tables []Table `json:"Tables"`
 }

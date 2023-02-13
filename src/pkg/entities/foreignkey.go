@@ -1,9 +1,9 @@
 package entities
 
 type ForeignKey struct {
-	name               string
-	source             Column
-	sourceTableName    string
-	relatedTo          Column
-	relatedToTableName string
+	Name               string `json:"Name"`
+	Source             Column `json:"Source"`
+	SourceTableName    string `json:"SourceTableName"`
+	RelatedTo          Column `json:"RelatedTo"`
+	RelatedToTableName string `json:"RelatedToTableName"`
 }

@@ -9,14 +9,21 @@ const (
 	ColumnUUID
 )
 
+//var ColumnTypeMapping map[uint]ColumnType {
+//	0: "int",
+//	1: "text",
+//	2: "bool",
+//	3: "uuid"
+//}
+
 type ColumnQueryGenerator interface {
 	GenerateColumnQuery()
 }
 
 type Column struct {
-	Name       string
-	Size       int
-	ColumnType ColumnType
+	Name       string     `json:"Name"`
+	Size       int        `json:"Size"`
+	ColumnType ColumnType `json:"ColumnType"`
 }
 
 func GenerateColumnQuery(column *Column) string {

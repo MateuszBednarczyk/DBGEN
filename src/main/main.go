@@ -1,14 +1,20 @@
 package main
 
 import (
-	"DBGEN/src/pkg/handlers"
 	"github.com/labstack/echo"
+
+	"DBGEN/src/pkg/handlers"
+)
+
+const (
+	apiVersion = "api/v1/"
 )
 
 func main() {
 
 	e := echo.New()
-	e.GET("/health", handlers.HealthCheck)
+	e.GET(apiVersion+"health", handlers.HealthCheck)
+	e.POST(apiVersion+"creator/table", handlers.GenerateScheme)
 
 	e.Logger.Fatal(e.Start("localhost:8000"))
 }
