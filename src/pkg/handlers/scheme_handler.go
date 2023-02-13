@@ -8,10 +8,10 @@ import (
 )
 
 func GenerateScheme(c echo.Context) error {
-	var scheme entities.Scheme
-	err := c.Bind(&scheme)
+	var database entities.Database
+	err := c.Bind(&database)
 	if err != nil {
-		return c.String(http.StatusBadRequest, "Bad request")
+		return c.JSON(http.StatusBadRequest, "Bad request")
 	}
-	return c.String(http.StatusOK, services.GenerateScheme(&scheme))
+	return c.JSON(http.StatusOK, services.GenerateScheme(&database))
 }

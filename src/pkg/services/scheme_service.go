@@ -5,12 +5,25 @@ import (
 	"strconv"
 )
 
-func GenerateScheme(scheme *entities.Scheme) string {
-	var query string = "CREATE SCHEMA [IF NOT EXISTS] " + scheme.Name + ";"
+func GenerateScheme(database *entities.Database) string {
+	var query string
+	query += "CREATE DATABASE " + database.Name + "; "
+	scheme := database.Scheme
+	query += "CREATE SCHEMA [IF NOT EXISTS] " + scheme.Name + ";"
 	for _, tab := range scheme.Tables {
 		query += "CREATE TABLE [IF NOT EXISTS] " + tab.Name + "("
 		for index, col := range tab.Columns {
-			query += col.Name + "int" + strconv.Itoa(col.Size) + "NOT NULL"
+			switch col.ColumnType {
+			case entities.ColumnInteger:
+				query += "INT "
+			case entities.ColumnText:
+				query += "VARCHAR "
+			case entities.ColumnBoolean:
+				query += "BOOLEAN "
+			case entities.ColumnUUID:
+				query += "UUID "
+			}
+			query += strconv.Itoa(col.Size) + " NOT NULL"
 			if index != len(tab.Columns)-1 {
 				query += ","
 			}
