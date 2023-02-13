@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func GenerateScheme(database *entities.Database) string {
+func GenerateDatabase(database *entities.Database) string {
 	var query string
 	query += "CREATE DATABASE " + database.Name + "; "
 	for _, tab := range database.Tables {
