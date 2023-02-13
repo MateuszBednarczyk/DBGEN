@@ -9,13 +9,6 @@ const (
 	ColumnUUID
 )
 
-//var ColumnTypeMapping map[uint]ColumnType {
-//	0: "int",
-//	1: "text",
-//	2: "bool",
-//	3: "uuid"
-//}
-
 type ColumnQueryGenerator interface {
 	GenerateColumnQuery()
 }
