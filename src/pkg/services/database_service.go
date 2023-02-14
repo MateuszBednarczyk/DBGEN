@@ -32,5 +32,11 @@ func GenerateDatabase(database *entities.Database) string {
 		query += ")"
 	}
 
+	for _, fk := range database.ForeignKeys {
+		if fk.Source.ColumnType == fk.RelatedTo.ColumnType {
+			query += "ALTER TABLE " + fk.Name + " ADD CONSTRAINT " + fk.Source.Name + " REFERENCES TO " + fk.RelatedTo.Name + "; "
+		}
+	}
+
 	return query
 }
