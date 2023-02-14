@@ -29,7 +29,7 @@ func GenerateDatabase(database *entities.Database) string {
 				query += ","
 			}
 		}
-		query += ")"
+		query += "); "
 	}
 
 	for _, fk := range database.ForeignKeys {
