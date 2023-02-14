@@ -13,5 +13,5 @@ func GenerateScheme(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "Bad request")
 	}
-	return c.JSON(http.StatusOK, services.GenerateDatabase(&database))
+	return c.JSON(http.StatusOK, services.GenerateDatabase(&database, c))
 }

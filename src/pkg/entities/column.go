@@ -18,7 +18,3 @@ type Column struct {
 	Size       int        `json:"Size"`
 	ColumnType ColumnType `json:"ColumnType"`
 }
-
-func GenerateColumnQuery(column *Column) string {
-	return "create column"
-}

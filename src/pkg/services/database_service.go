@@ -3,10 +3,12 @@ package services
 import (
 	"DBGEN/src/pkg/entities"
 	"DBGEN/src/pkg/util"
+	"github.com/labstack/echo"
+	"net/http"
 	"strconv"
 )
 
-func GenerateDatabase(database *entities.Database) string {
+func GenerateDatabase(database *entities.Database, c echo.Context) error {
 	var query string
 	query += "CREATE DATABASE " + database.Name + "; "
 	for _, tab := range database.Tables {
@@ -33,10 +35,11 @@ func GenerateDatabase(database *entities.Database) string {
 	}
 
 	for _, fk := range database.ForeignKeys {
-		if fk.Source.ColumnType == fk.RelatedTo.ColumnType {
-			query += "ALTER TABLE " + fk.Name + " ADD CONSTRAINT " + fk.Source.Name + " REFERENCES TO " + fk.RelatedTo.Name + "; "
+		if fk.Source.ColumnType != fk.RelatedTo.ColumnType {
+			return c.JSON(http.StatusBadRequest, "Please check if tables types equals")
 		}
+		query += "ALTER TABLE " + fk.Name + " ADD CONSTRAINT " + fk.Source.Name + " REFERENCES TO " + fk.RelatedTo.Name + "; "
 	}
 
-	return query
+	return c.JSON(http.StatusOK, query)
 }
